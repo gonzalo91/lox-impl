@@ -1,5 +1,5 @@
 
-package lox;
+package com.lox.interpreter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +8,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Scanner;
 
 public class Lox{
 
@@ -35,7 +34,12 @@ public class Lox{
 
         for(;;){
             System.out.println("> ");
-            String line = reader.readLine();
+            String line;
+            try {
+                line = reader.readLine();
+            } catch (IOException e) {
+                line = null;
+            }
             if(line == null) break;
             run(line);
             hadError = false;
